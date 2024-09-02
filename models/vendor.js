@@ -2,8 +2,6 @@ import mongoose  from "mongoose";
 import userModel from "./user.js";
 
 
-
-
 const vendorSchema = new mongoose.Schema({
     name: {type: String,required: true},
     email: {type: String,required: true},

@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import { add, update, deletevendor, getSingle, getByUserId, getAll } from '../controllers/vendor.js';
+import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers } from '../controllers/vendor.js';
 import { isAuthenticate,isCheckRole } from '../middlewears/auth.js';
 import { getAllByStatus } from '../controllers/vendor.js';
 import multer from 'multer'
@@ -71,5 +71,7 @@ router.route('/get-by-user/').get(isAuthenticate, getByUserId);
 // Route to get all vendors
 router.route('/all').get( isAuthenticate, isCheckRole('admin'), getAll);
 router.route('/all-by-status').get( isAuthenticate, isCheckRole('admin'), getAllByStatus);
+router.route('/add-member').post( isAuthenticate, addMember);
+router.route('/get-member').get( isAuthenticate, getMembers);
 
 export default router;

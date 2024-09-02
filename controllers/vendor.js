@@ -1,5 +1,6 @@
 import catchAsyncError from '../middlewears/catchAsyncError.js';
 import VendorModel from '../models/vendor.js';
+import memberModel from '../models/member.js';
 
 export const add = catchAsyncError(async (req, res) => {
     const { name, email, address, city, state, phone, amount, backofficeAmount, freightAmount,freightPallets, salesAmount, profitAmount, warehouseAmount } = req.body;
@@ -204,5 +205,41 @@ export const getAllByStatus = catchAsyncError(async (req, res) => {
     res.status(200).json({
       success: true,
       vendors
+    });
+  });
+
+  export const addMember = catchAsyncError(async (req, res) => {
+    const { name, email, address, city, state, phone } = req.body;
+  
+   
+  
+    // Create a new vendor object
+    const newMember = new memberModel({
+      name,
+      email,
+      address,
+      city,
+      state,
+      phone,
+      owner: req.user._id,
+    });
+  
+    await newMember.save();
+  
+    res.status(201).json({
+      success: true,
+      message: "Member added successfully",
+      vendor: newMember
+    });
+  });
+
+
+
+  export const getMembers = catchAsyncError(async (req, res) => {
+    const members = await memberModel.find({owner: req.user._id})
+  
+    res.status(200).json({
+      success: true,
+      members
     });
   });
