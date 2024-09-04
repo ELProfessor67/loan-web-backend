@@ -19,11 +19,14 @@ const vendorSchema = new mongoose.Schema({
     freight: {
         amount: {type: Number,required: true},
         pallets: {type: Number,required: true},
-        file: {type: String,required: false}
+        file: {type: String,required: false},
+        companyName: {type: String}
     },
     sales: {
         amount: {type: Number,required: true},
         file: {type: String,required: false},
+        companyName: {type: String},
+        companyAddress: {type: String},
     },
     profit: {
         amount: {type: Number,required: true},

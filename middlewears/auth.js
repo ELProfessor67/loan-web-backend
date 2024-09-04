@@ -7,7 +7,7 @@ export const isAuthenticate = async (req,res,next) => {
 
         if(!token) throw new Error('Unauthorize user');
         const decodeToken = jwt.verify(token,process.env.JWT_SECRET);
-        const user = await UserModel.findById(decodeToken._id);
+        const user = await UserModel.findById(decodeToken._id).populate('bank');
         
         if(!user) throw new Error('Unauthorize user');
        

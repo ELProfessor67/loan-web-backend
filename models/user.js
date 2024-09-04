@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto';
 import sendEmail from "../utils/sendMail.js";
+import { type } from "os";
 
 
 function generateOTP() {
@@ -24,7 +25,8 @@ const userSchema = new mongoose.Schema({
 	resetPasswordToken: {type: String, default: undefined},
 	resetPasswordExpire: {type: String, default: undefined},
     role: {type: String, enum: ['user','admin'],default: 'user'},
-	adminServiceCharge: {type: Number,required: false,default: undefined}
+	adminServiceCharge: {type: Number,required: false,default: undefined},
+	bank: {type: mongoose.Schema.Types.ObjectId,ref: 'bank',default: undefined}
 },{timestamps: true});
 
 

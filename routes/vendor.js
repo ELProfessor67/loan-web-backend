@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers } from '../controllers/vendor.js';
+import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers, addCompany, getCompany, addBank, getBank } from '../controllers/vendor.js';
 import { isAuthenticate,isCheckRole } from '../middlewears/auth.js';
 import { getAllByStatus } from '../controllers/vendor.js';
 import multer from 'multer'
@@ -73,5 +73,11 @@ router.route('/all').get( isAuthenticate, isCheckRole('admin'), getAll);
 router.route('/all-by-status').get( isAuthenticate, isCheckRole('admin'), getAllByStatus);
 router.route('/add-member').post( isAuthenticate, addMember);
 router.route('/get-member').get( isAuthenticate, getMembers);
+router.route('/add-company').post( isAuthenticate, addCompany);
+router.route('/get-company').get( isAuthenticate, getCompany);
+
+
+router.route('/add-bank').post( isAuthenticate, addBank);
+router.route('/get-bank').get( isAuthenticate, getBank);
 
 export default router;
