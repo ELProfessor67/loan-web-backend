@@ -6,7 +6,7 @@ import bankModel from '../models/bank.js';
 import userModel from '../models/user.js';
 
 export const add = catchAsyncError(async (req, res) => {
-    const { name, email, address, city, state, phone, amount, backofficeAmount, freightAmount,freightPallets, salesAmount, profitAmount, warehouseAmount,SalesCompanyName,SalesCompanyAddress,freightCompanyName } = req.body;
+    const { name, email, address, city, state, phone, amount, backofficeAmount, freightAmount,freightPallets, salesAmount, profitAmount, warehouseAmount,SalesCompanyName,SalesCompanyAddress,freightCompanyName,type,PONumber,terms,dealId,trackingLink,shippedDate,reciveDate } = req.body;
   
     // Extract the file paths from the request
     const backofficeFilePath = req.files['backoffice'] ? req.files['backoffice'][0].path : null;
@@ -14,6 +14,7 @@ export const add = catchAsyncError(async (req, res) => {
     const salesFilePath = req.files['sales'] ? req.files['sales'][0].path : null;
     const profitFilePath = req.files['profit'] ? req.files['profit'][0].path : null;
     const warehouseFilePath = req.files['warehouse'] ? req.files['warehouse'][0].path : null;
+    const copyOrderAttachmentFilePath = req.files['copyorder'] ? req.files['copyorder'][0].path : null;
   
     // Create a new vendor object
     const newVendor = new VendorModel({
@@ -24,6 +25,10 @@ export const add = catchAsyncError(async (req, res) => {
       state,
       phone,
       amount,
+      type,
+      PONumber,
+      terms,
+      dealId,
       backoffice: {
         amount: backofficeAmount,
         file: backofficeFilePath
@@ -32,7 +37,10 @@ export const add = catchAsyncError(async (req, res) => {
         amount: freightAmount,
         file: freightFilePath,
         pallets: freightPallets,
-        companyName: freightCompanyName
+        companyName: freightCompanyName,
+        trackingLink,
+        shippedDate,
+        reciveDate,
       },
       sales: {
         amount: salesAmount,
@@ -47,6 +55,9 @@ export const add = catchAsyncError(async (req, res) => {
       warehouse: {
         amount: warehouseAmount,
         file: warehouseFilePath
+      },
+      copyOrderAttachment: {
+        file: copyOrderAttachmentFilePath
       },
       owner: req.user._id,
       status: 'pending' // Set initial status to 'pending'

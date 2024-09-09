@@ -27,6 +27,9 @@ const storage = multer.diskStorage({
         case 'warehouse':
           folderName += 'warehouse';
           break;
+        case 'copyorder':
+          folderName += 'copyorder';
+          break;
         default:
           folderName += 'others'; // Fallback folder for any other files
       }
@@ -49,6 +52,7 @@ router.route('/add').post(isAuthenticate,uploader.fields([
     { name: 'sales', maxCount: 1 },
     { name: 'profit', maxCount: 1 },
     { name: 'warehouse', maxCount: 1 },
+    { name: 'copyorder', maxCount: 1 },
   ]), add); 
 
 
@@ -58,6 +62,7 @@ router.route('/update/:id').put(isAuthenticate,uploader.fields([
     { name: 'sales', maxCount: 1 },
     { name: 'profit', maxCount: 1 },
     { name: 'warehouse', maxCount: 1 },
+    { name: 'copyorder', maxCount: 1 },
   ]), update);
 // Route to delete a vendor
 router.route('/delete/:id').delete(isAuthenticate, isCheckRole('admin'), deletevendor); 

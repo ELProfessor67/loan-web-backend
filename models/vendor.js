@@ -11,16 +11,27 @@ const vendorSchema = new mongoose.Schema({
     phone: {type: String,required: true},
     status: {type: String, enum: ['pending','reject','complete']},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: userModel},
+    type: {type: String,default: undefined},
+    PONumber: {type: String,default: undefined},
+    terms: {type: String,default: undefined},
+    dealId: {type: String, default: undefined},
+
     amount: {type: Number,required: true},
     backoffice: {
         amount: {type: Number,required: true},
+        file: {type: String,required: false},
+    },
+    copyOrderAttachment: {
         file: {type: String,required: false},
     },
     freight: {
         amount: {type: Number,required: true},
         pallets: {type: Number,required: true},
         file: {type: String,required: false},
-        companyName: {type: String}
+        companyName: {type: String},
+        trackingLink: {type: String},
+        shippedDate: {type: String},
+        reciveDate: {type: String}
     },
     sales: {
         amount: {type: Number,required: true},
