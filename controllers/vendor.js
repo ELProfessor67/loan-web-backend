@@ -4,9 +4,10 @@ import memberModel from '../models/member.js';
 import companyModel from '../models/company.js';
 import bankModel from '../models/bank.js';
 import userModel from '../models/user.js';
+import vendorModel from '../models/vendor.js';
 
 export const add = catchAsyncError(async (req, res) => {
-    const { name, email, address, city, state, phone, amount, backofficeAmount, freightAmount,freightPallets, salesAmount, profitAmount, warehouseAmount,SalesCompanyName,SalesCompanyAddress,freightCompanyName,type,PONumber,terms,dealId,trackingLink,shippedDate,reciveDate } = req.body;
+    const { name, email, address, city, state, phone, amount, backofficeAmount, freightAmount,freightPallets, salesAmount, profitAmount, warehouseAmount,SalesCompanyName,SalesCompanyAddress,freightCompanyName,type,PONumber,terms,dealId,trackingLink,shippedDate,reciveDate,dealDate,trackingNumber,salesShippedDate,companyId } = req.body;
   
     // Extract the file paths from the request
     const backofficeFilePath = req.files['backoffice'] ? req.files['backoffice'][0].path : null;
@@ -15,6 +16,10 @@ export const add = catchAsyncError(async (req, res) => {
     const profitFilePath = req.files['profit'] ? req.files['profit'][0].path : null;
     const warehouseFilePath = req.files['warehouse'] ? req.files['warehouse'][0].path : null;
     const copyOrderAttachmentFilePath = req.files['copyorder'] ? req.files['copyorder'][0].path : null;
+    const fshippedDate = req.files['shippedDate'] ? req.files['shippedDate'][0].path : null;
+    const freciveDate = req.files['reciveDate'] ? req.files['reciveDate'][0].path : null;
+    const asalesShippedDate = req.files['salesShippedDate'] ? req.files['salesShippedDate'][0].path : null;
+    
   
     // Create a new vendor object
     const newVendor = new VendorModel({
@@ -29,6 +34,8 @@ export const add = catchAsyncError(async (req, res) => {
       PONumber,
       terms,
       dealId,
+      dealDate,
+      company: companyId,
       backoffice: {
         amount: backofficeAmount,
         file: backofficeFilePath
@@ -39,14 +46,26 @@ export const add = catchAsyncError(async (req, res) => {
         pallets: freightPallets,
         companyName: freightCompanyName,
         trackingLink,
-        shippedDate,
-        reciveDate,
+        trackingNumber,
+        shipped: {
+          date: shippedDate,
+          file: fshippedDate
+        },
+        recive: {
+          date: reciveDate,
+          file: freciveDate
+        },
       },
       sales: {
         amount: salesAmount,
         file: salesFilePath,
         companyName: SalesCompanyName,
-        companyAddress: SalesCompanyAddress
+        companyAddress: SalesCompanyAddress,
+        shipped: {
+          date: salesShippedDate,
+          file: asalesShippedDate
+        },
+        company: companyId
       },
       profit: {
         amount: profitAmount,
@@ -171,7 +190,7 @@ export const getSingle = catchAsyncError(async (req, res) => {
   const { id } = req.params;
 
   // Find vendor by ID
-  const vendor = await VendorModel.findById(id).populate('owner');
+  const vendor = await VendorModel.findById(id).populate('owner').populate('company');
   if (!vendor) {
     return res.status(404).json({
       success: false,
@@ -229,7 +248,7 @@ export const getAllByStatus = catchAsyncError(async (req, res) => {
   });
 
   export const addMember = catchAsyncError(async (req, res) => {
-    const { name, email, address, city, state, phone } = req.body;
+    const { name, email, address, city, state, phone, accountNumber, routingNumber, bankName, bankAddress } = req.body;
   
    
   
@@ -242,6 +261,7 @@ export const getAllByStatus = catchAsyncError(async (req, res) => {
       state,
       phone,
       owner: req.user._id,
+      accountNumber, routingNumber, bankName, bankAddress
     });
   
     await newMember.save();
@@ -269,23 +289,39 @@ export const getAllByStatus = catchAsyncError(async (req, res) => {
 
 
   export const addCompany = catchAsyncError(async (req, res) => {
-    const { name, address} = req.body;
+    const { name, address, email, phone, accountNumber, routingNumber, bankName, bankAddress} = req.body;
   
-   
-  
+   const company = await companyModel.findOne({owner: req.user._id});
+
+   if(company){
+    company.name = name || company.name;
+    company.address = address || company.address;
+    company.email = email || company.email;
+    company.accountNumber = accountNumber || company.accountNumber;
+    company.routingNumber = routingNumber || company.routingNumber;
+    company.bankName = bankName || company.bankName;
+    company.bankAddress = bankAddress || company.bankAddress;
+    await company.save();
+    await userModel.findByIdAndUpdate(req.user._id,{company: company._id});
+   }else{
     // Create a new vendor object
     const newComany = new companyModel({
       name,
       address,
       owner: req.user._id,
+      email, phone, accountNumber, routingNumber, bankName, bankAddress
     });
   
     await newComany.save();
+
+    await userModel.findByIdAndUpdate(req.user._id,{company: newComany._id});
+   }
+  
+    
   
     res.status(201).json({
       success: true,
-      message: "Company added successfully",
-      vendor: newComany
+      message: "Company updated successfully"
     });
   });
 
@@ -361,3 +397,17 @@ export const getAllByStatus = catchAsyncError(async (req, res) => {
       bank
     });
   });
+
+let number = 0;
+(async function() {
+  number =  await vendorModel.countDocuments();
+})()
+
+export const getUniqueDelaNUmber = catchAsyncError(async (req, res) => {
+  
+  ++number;
+  res.status(200).json({
+    success: true,
+    id: number
+  });
+});

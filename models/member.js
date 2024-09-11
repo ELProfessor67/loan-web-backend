@@ -11,7 +11,11 @@ const memberSchema = new mongoose.Schema({
     city: {type: String,required: true},
     state: {type: String,required: true},
     phone: {type: String,required: true},
-    owner: {type: mongoose.Schema.Types.ObjectId, ref: 'user'}
+    owner: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
+    accountNumber: {type: String,required: false},
+    routingNumber: {type: String,required: false},
+    bankName: {type: String,required: false},
+    bankAddress: {type: String,required: false},
 },{timestamps: true});
 
 

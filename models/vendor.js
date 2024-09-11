@@ -15,10 +15,12 @@ const vendorSchema = new mongoose.Schema({
     PONumber: {type: String,default: undefined},
     terms: {type: String,default: undefined},
     dealId: {type: String, default: undefined},
+    dealDate: {type: String,default: undefined},
+    company: {type: mongoose.Schema.Types.ObjectId,ref: 'company'},
 
     amount: {type: Number,required: true},
     backoffice: {
-        amount: {type: Number,required: true},
+        amount: {type: Number,required: false},
         file: {type: String,required: false},
     },
     copyOrderAttachment: {
@@ -30,14 +32,26 @@ const vendorSchema = new mongoose.Schema({
         file: {type: String,required: false},
         companyName: {type: String},
         trackingLink: {type: String},
-        shippedDate: {type: String},
-        reciveDate: {type: String}
+        trackingNumber: {type: String},
+        shipped: {
+            date: {type: String,default: undefined},
+            file: {type: String}
+        },
+        recive: {
+            date: {type: String,default: undefined},
+            file: {type: String}
+        }
     },
     sales: {
         amount: {type: Number,required: true},
         file: {type: String,required: false},
         companyName: {type: String},
         companyAddress: {type: String},
+        shipped: {
+            file:  {type: String,required: false},
+            date: {type: String,required: false,default: undefined}
+        },
+        
     },
     profit: {
         amount: {type: Number,required: true},

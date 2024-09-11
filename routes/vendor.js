@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers, addCompany, getCompany, addBank, getBank } from '../controllers/vendor.js';
+import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers, addCompany, getCompany, addBank, getBank, getUniqueDelaNUmber } from '../controllers/vendor.js';
 import { isAuthenticate,isCheckRole } from '../middlewears/auth.js';
 import { getAllByStatus } from '../controllers/vendor.js';
 import multer from 'multer'
@@ -53,6 +53,9 @@ router.route('/add').post(isAuthenticate,uploader.fields([
     { name: 'profit', maxCount: 1 },
     { name: 'warehouse', maxCount: 1 },
     { name: 'copyorder', maxCount: 1 },
+    { name: 'shippedDate', maxCount: 1 },
+    { name: 'reciveDate', maxCount: 1 },
+    { name: 'salesShippedDate', maxCount: 1 },
   ]), add); 
 
 
@@ -63,6 +66,9 @@ router.route('/update/:id').put(isAuthenticate,uploader.fields([
     { name: 'profit', maxCount: 1 },
     { name: 'warehouse', maxCount: 1 },
     { name: 'copyorder', maxCount: 1 },
+    { name: 'shippedDate', maxCount: 1 },
+    { name: 'reciveDate', maxCount: 1 },
+    { name: 'salesShippedDate', maxCount: 1 },
   ]), update);
 // Route to delete a vendor
 router.route('/delete/:id').delete(isAuthenticate, isCheckRole('admin'), deletevendor); 
@@ -84,5 +90,6 @@ router.route('/get-company').get( isAuthenticate, getCompany);
 
 router.route('/add-bank').post( isAuthenticate, addBank);
 router.route('/get-bank').get( isAuthenticate, getBank);
+router.route('/get-id').get( getUniqueDelaNUmber);
 
 export default router;
