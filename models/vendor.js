@@ -3,65 +3,184 @@ import userModel from "./user.js";
 
 
 const vendorSchema = new mongoose.Schema({
-    name: {type: String,required: true},
-    email: {type: String,required: true},
-    address: {type: String,required: true},
-    city: {type: String,required: true},
-    state: {type: String,required: true},
-    phone: {type: String,required: true},
     status: {type: String, enum: ['pending','reject','complete']},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: userModel},
-    type: {type: String,default: undefined},
-    PONumber: {type: String,default: undefined},
-    terms: {type: String,default: undefined},
-    dealId: {type: String, default: undefined},
-    dealDate: {type: String,default: undefined},
     company: {type: mongoose.Schema.Types.ObjectId,ref: 'company'},
+    message: {type: String,default: undefined},
+    dealId: {type: String,default: undefined},
 
-    amount: {type: Number,required: true},
-    backoffice: {
-        amount: {type: Number,required: false},
-        file: {type: String,required: false},
-    },
-    copyOrderAttachment: {
-        file: {type: String,required: false},
+    mdse: {
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'member',default: undefined,required: false},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
+        }
     },
     freight: {
-        amount: {type: Number,required: true},
-        pallets: {type: Number,required: true},
-        file: {type: String,required: false},
-        companyName: {type: String},
-        trackingLink: {type: String},
-        trackingNumber: {type: String},
-        shipped: {
-            date: {type: String,default: undefined},
-            file: {type: String}
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'member',default: undefined,required: false},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
         },
-        recive: {
-            date: {type: String,default: undefined},
-            file: {type: String}
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
+        }
+    },
+    freight2: {
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'member',default: undefined,required: false},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
+        }
+    },
+    warehouse: {
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'member',default: undefined,required: false},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
+        }
+    },
+    serviceCharge: {
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'member',default: undefined,required: false},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
+        }
+    },
+    misc: {
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'member',default: undefined,required: false},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
         }
     },
     sales: {
-        amount: {type: Number,required: true},
-        file: {type: String,required: false},
-        companyName: {type: String},
-        companyAddress: {type: String},
-        shipped: {
-            file:  {type: String,required: false},
-            date: {type: String,required: false,default: undefined}
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'salecompany'},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
         },
-        
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
+        }
     },
     profit: {
-        amount: {type: Number,required: true},
-        file: {type: String,required: false},
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'member',default: undefined,required: false},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
+        }
     },
-    warehouse: {
-        amount: {type: Number,required: true},
-        file: {type: String,required: false},
+    PRC: {
+        vendor: {type: mongoose.Schema.Types.ObjectId,ref: 'member',default: undefined,required: false},
+        POnumber: {type: String,default: undefined },
+        amount: {type: String, default: undefined},
+        attach: {type: String, default: undefined},
+        ship: {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        recieve:
+        {
+            date: {type: String,default: undefined },
+            file: {type: String,default: undefined }
+        },
+        tracking:{
+            link: {type: String,default: undefined },
+            number: {type: String, default: undefined}
+        }
     },
-    message: {type: String,default: undefined}
+
 },{timestamps: true});
 
 

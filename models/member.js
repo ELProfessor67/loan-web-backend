@@ -6,6 +6,7 @@ import userModel from "./user.js";
 
 const memberSchema = new mongoose.Schema({
     name: {type: String,required: true},
+    contactName: {type: String,default: ''},
     email: {type: String,required: true},
     address: {type: String,required: true},
     city: {type: String,required: true},

@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers, addCompany, getCompany, addBank, getBank, getUniqueDelaNUmber } from '../controllers/vendor.js';
+import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers, addCompany, getCompany, addBank, getBank, getUniqueDelaNUmber, addSalesCompany, getSalesCompany } from '../controllers/vendor.js';
 import { isAuthenticate,isCheckRole } from '../middlewears/auth.js';
 import { getAllByStatus } from '../controllers/vendor.js';
 import multer from 'multer'
@@ -47,28 +47,86 @@ const storage = multer.diskStorage({
 const uploader = multer({ storage });
 
 router.route('/add').post(isAuthenticate,uploader.fields([
-    { name: 'backoffice', maxCount: 1 },
-    { name: 'freight', maxCount: 1 },
-    { name: 'sales', maxCount: 1 },
-    { name: 'profit', maxCount: 1 },
-    { name: 'warehouse', maxCount: 1 },
-    { name: 'copyorder', maxCount: 1 },
-    { name: 'shippedDate', maxCount: 1 },
-    { name: 'reciveDate', maxCount: 1 },
-    { name: 'salesShippedDate', maxCount: 1 },
+    { name: 'mdseAttach', maxCount: 1 },
+    { name: 'mdseShipFile', maxCount: 1 },
+    { name: 'mdseRecieveFile', maxCount: 1 },
+
+    { name: 'freightAttach', maxCount: 1 },
+    { name: 'freightShipFile', maxCount: 1 },
+    { name: 'freightRecieveFile', maxCount: 1 },
+
+
+    { name: 'freight2Attach', maxCount: 1 },
+    { name: 'freight2ShipFile', maxCount: 1 },
+    { name: 'freight2RecieveFile', maxCount: 1 },
+
+
+    { name: 'warehouseAttach', maxCount: 1 },
+    { name: 'warehouseShipFile', maxCount: 1 },
+    { name: 'warehouseRecieveFile', maxCount: 1 },
+
+    { name: 'serviceChargeAttach', maxCount: 1 },
+    { name: 'serviceChargeShipFile', maxCount: 1 },
+    { name: 'serviceChargeRecieveFile', maxCount: 1 },
+
+    { name: 'miscAttach', maxCount: 1 },
+    { name: 'miscShipFile', maxCount: 1 },
+    { name: 'miscRecieveFile', maxCount: 1 },
+
+    { name: 'salesAttach', maxCount: 1 },
+    { name: 'salesShipFile', maxCount: 1 },
+    { name: 'salesRecieveFile', maxCount: 1 },
+
+    { name: 'profitAttach', maxCount: 1 },
+    { name: 'profitShipFile', maxCount: 1 },
+    { name: 'profitRecieveFile', maxCount: 1 },
+
+
+    { name: 'PRCAttach', maxCount: 1 },
+    { name: 'PRCShipFile', maxCount: 1 },
+    { name: 'PRCRecieveFile', maxCount: 1 },
   ]), add); 
 
 
 router.route('/update/:id').put(isAuthenticate,uploader.fields([
-    { name: 'backoffice', maxCount: 1 },
-    { name: 'freight', maxCount: 1 },
-    { name: 'sales', maxCount: 1 },
-    { name: 'profit', maxCount: 1 },
-    { name: 'warehouse', maxCount: 1 },
-    { name: 'copyorder', maxCount: 1 },
-    { name: 'shippedDate', maxCount: 1 },
-    { name: 'reciveDate', maxCount: 1 },
-    { name: 'salesShippedDate', maxCount: 1 },
+  { name: 'mdseAttach', maxCount: 1 },
+  { name: 'mdseShipFile', maxCount: 1 },
+  { name: 'mdseRecieveFile', maxCount: 1 },
+
+  { name: 'freightAttach', maxCount: 1 },
+  { name: 'freightShipFile', maxCount: 1 },
+  { name: 'freightRecieveFile', maxCount: 1 },
+
+
+  { name: 'freight2Attach', maxCount: 1 },
+  { name: 'freight2ShipFile', maxCount: 1 },
+  { name: 'freight2RecieveFile', maxCount: 1 },
+
+
+  { name: 'warehouseAttach', maxCount: 1 },
+  { name: 'warehouseShipFile', maxCount: 1 },
+  { name: 'warehouseRecieveFile', maxCount: 1 },
+
+  { name: 'serviceChargeAttach', maxCount: 1 },
+  { name: 'serviceChargeShipFile', maxCount: 1 },
+  { name: 'serviceChargeRecieveFile', maxCount: 1 },
+
+  { name: 'miscAttach', maxCount: 1 },
+  { name: 'miscShipFile', maxCount: 1 },
+  { name: 'miscRecieveFile', maxCount: 1 },
+
+  { name: 'salesAttach', maxCount: 1 },
+  { name: 'salesShipFile', maxCount: 1 },
+  { name: 'salesRecieveFile', maxCount: 1 },
+
+  { name: 'profitAttach', maxCount: 1 },
+  { name: 'profitShipFile', maxCount: 1 },
+  { name: 'profitRecieveFile', maxCount: 1 },
+
+
+  { name: 'PRCAttach', maxCount: 1 },
+  { name: 'PRCShipFile', maxCount: 1 },
+  { name: 'PRCRecieveFile', maxCount: 1 },
   ]), update);
 // Route to delete a vendor
 router.route('/delete/:id').delete(isAuthenticate, isCheckRole('admin'), deletevendor); 
@@ -86,6 +144,8 @@ router.route('/add-member').post( isAuthenticate, addMember);
 router.route('/get-member').get( isAuthenticate, getMembers);
 router.route('/add-company').post( isAuthenticate, addCompany);
 router.route('/get-company').get( isAuthenticate, getCompany);
+router.route('/add-sales-company').post( isAuthenticate, addSalesCompany);
+router.route('/get-sales-company').get( isAuthenticate, getSalesCompany);
 
 
 router.route('/add-bank').post( isAuthenticate, addBank);

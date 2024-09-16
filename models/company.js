@@ -6,6 +6,7 @@ import userModel from "./user.js";
 
 const companySchema = new mongoose.Schema({
     name: {type: String,required: true},
+    contactName: {type: String,default: ''},
     address: {type: String,required: true},
     owner: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
     email: {type: String, default: undefined},
