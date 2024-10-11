@@ -83,6 +83,7 @@ export const add = catchAsyncError(async (req, res) => {
     
   
     // Create a new vendor object
+    console.log(req.user.company?._id,'company id')
     const newVendor = new VendorModel({
       dealId,
       company:  req.user.company?._id,
@@ -284,14 +285,8 @@ export const add = catchAsyncError(async (req, res) => {
   // Update a vendor
   export const update = catchAsyncError(async (req, res) => {
     const { id } = req.params;
-    const { name, email, address, city, state, phone, amount, backofficeAmount, freightAmount, salesAmount, profitAmount, warehouseAmount, status,freightPallets,message,SalesCompanyName,SalesCompanyAddress,freightCompanyName } = req.body;
-  
-    // Extract the file paths from the request
-    const backofficeFilePath = req.files['backoffice'] ? req.files['backoffice'][0].path : null;
-    const freightFilePath = req.files['freight'] ? req.files['freight'][0].path : null;
-    const salesFilePath = req.files['sales'] ? req.files['sales'][0].path : null;
-    const profitFilePath = req.files['profit'] ? req.files['profit'][0].path : null;
-    const warehouseFilePath = req.files['warehouse'] ? req.files['warehouse'][0].path : null;
+    const {status,message } = req.body;
+
   
     // Find vendor by ID
     let vendor = await VendorModel.findById(id);
@@ -310,38 +305,7 @@ export const add = catchAsyncError(async (req, res) => {
       });
     }
   
-    // Update vendor details
-    vendor.name = name || vendor.name;
-    vendor.email = email || vendor.email;
-    vendor.address = address || vendor.address;
-    vendor.city = city || vendor.city;
-    vendor.state = state || vendor.state;
-    vendor.phone = phone || vendor.phone;
-    vendor.amount = amount || vendor.amount;
-    vendor.backoffice = {
-      amount: backofficeAmount || vendor.backoffice.amount,
-      file: backofficeFilePath || vendor.backoffice.file
-    };
-    vendor.freight = {
-      amount: freightAmount || vendor.freight.amount,
-      file: freightFilePath || vendor.freight.file,
-      pallets: freightPallets || vendor.freight.pallets,
-      companyName: freightCompanyName || vendor.freight.companyName
-    };
-    vendor.sales = {
-      amount: salesAmount || vendor.sales.amount,
-      file: salesFilePath || vendor.sales.file,
-      companyName: SalesCompanyName || vendor.sales.companyName,
-      companyAddress: SalesCompanyAddress || vendor.sales.companyAddress,
-    };
-    vendor.profit = {
-      amount: profitAmount || vendor.profit.amount,
-      file: profitFilePath || vendor.profit.file
-    };
-    vendor.warehouse = {
-      amount: warehouseAmount || vendor.warehouse.amount,
-      file: warehouseFilePath || vendor.warehouse.file
-    };
+
     vendor.status = status || vendor.status;
     vendor.message = message;
   
