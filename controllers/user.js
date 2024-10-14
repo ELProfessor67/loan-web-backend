@@ -231,3 +231,16 @@ export const getSericeCharge = catchAsyncError(async (req, res, next) => {
         serviceCharge: adminServiceCharge || 200
     })
   });
+
+
+
+export const sendEmailData = catchAsyncError(async (req, res, next) => {
+    const {email, subject, message,name} = req.body;
+    const messageData = `Name: ${name}\n Email: ${email}\n Message: ${message}`;
+    await sendEmail(process.env.ADMIN_EMAIL, subject, messageData);
+    res.status(200).json({
+        success: true,
+        message: 'Email sent successfully'
+    })
+  });
+
