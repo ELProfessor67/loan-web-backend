@@ -21,7 +21,7 @@ export const add = catchAsyncError(async (req, res) => {
       serviceChargeVendor,serviceChargePOnumber,serviceChargeAmount,serviceChargeShipDate,serviceChargeRecieveDate,serviceChargeTrackingNumber,serviceChargeTracking,
 
 
-      miscVendor,miscPOnumber,miscAmount,miscShipDate,miscRecieveDate,miscTrackingNumber,miscTracking,
+      miscVendor,miscPOnumber,miscAmount,miscShipDate,miscRecieveDate,miscTrackingNumber,miscTracking,miscName,
 
       salesVendor,salesPOnumber,salesAmount,salesShipDate,salesRecieveDate,salesTrackingNumber,salesTracking,
 
@@ -197,6 +197,7 @@ export const add = catchAsyncError(async (req, res) => {
         POnumber: miscPOnumber,
         amount: miscAmount,
         attach: miscAttach,
+        name: miscName,
         ship: {
           date: miscShipDate,
           file: miscShipFile

@@ -109,6 +109,7 @@ const vendorSchema = new mongoose.Schema({
         POnumber: {type: String,default: undefined },
         amount: {type: String, default: undefined},
         attach: {type: String, default: undefined},
+        name: {type: String,default: 'misc'},
         ship: {
             date: {type: String,default: undefined },
             file: {type: String,default: undefined }
