@@ -20,6 +20,8 @@ export const add = catchAsyncError(async (req, res) => {
       
       serviceChargeVendor,serviceChargePOnumber,serviceChargeAmount,serviceChargeShipDate,serviceChargeRecieveDate,serviceChargeTrackingNumber,serviceChargeTracking,
 
+      serviceCharge2Vendor,serviceCharge2POnumber,serviceCharge2Amount,serviceCharge2ShipDate,serviceCharge2RecieveDate,serviceCharge2TrackingNumber,serviceCharge2Tracking,
+
 
       miscVendor,miscPOnumber,miscAmount,miscShipDate,miscRecieveDate,miscTrackingNumber,miscTracking,miscName,
 
@@ -31,7 +33,8 @@ export const add = catchAsyncError(async (req, res) => {
 
       PRCVendor,PRCPOnumber,PRCAmount,PRCShipDate,PRCRecieveDate,PRCTrackingNumber,PRCTracking,
 
-      dealId
+      dealId,
+      PIEAmout
        
     } = req.body;
 
@@ -41,36 +44,38 @@ export const add = catchAsyncError(async (req, res) => {
     const mdseAttach = req.files['mdseAttach'] ? req.files['mdseAttach'][0].path : null;
     const mdseShipFile = req.files['mdseShipFile'] ? req.files['mdseShipFile'][0].path : null;
     const mdseRecieveFile = req.files['mdseRecieveFile'] ? req.files['mdseRecieveFile'][0].path : null;
+    const mdseSign = req.files['mdseSign'] ? req.files['mdseSign'][0].path : null;
 
     const freightAttach = req.files['freightAttach'] ? req.files['freightAttach'][0].path : null;
     const freightShipFile = req.files['freightShipFile'] ? req.files['freightShipFile'][0].path : null;
     const freightRecieveFile = req.files['freightRecieveFile'] ? req.files['freightRecieveFile'][0].path : null;
-
+    const freightSign = req.files['freightSign'] ? req.files['freightSign'][0].path : null;
 
     const freight2Attach = req.files['freight2Attach'] ? req.files['freight2Attach'][0].path : null;
     const freight2ShipFile = req.files['freight2ShipFile'] ? req.files['freight2ShipFile'][0].path : null;
     const freight2RecieveFile = req.files['freight2RecieveFile'] ? req.files['freight2RecieveFile'][0].path : null;
-
+    const freight2Sign = req.files['freight2Sign'] ? req.files['freight2Sign'][0].path : null;
 
     const warehouseAttach = req.files['warehouseAttach'] ? req.files['warehouseAttach'][0].path : null;
     const warehouseShipFile = req.files['warehouseShipFile'] ? req.files['warehouseShipFile'][0].path : null;
     const warehouseRecieveFile = req.files['warehouseRecieveFile'] ? req.files['warehouseRecieveFile'][0].path : null;
-
+    const warehouseSign = req.files['warehouseSign'] ? req.files['warehouseSign'][0].path : null;
 
     const serviceChargeAttach = req.files['serviceChargeAttach'] ? req.files['serviceChargeAttach'][0].path : null;
     const serviceChargeShipFile = req.files['serviceChargeShipFile'] ? req.files['serviceChargeShipFile'][0].path : null;
     const serviceChargeRecieveFile = req.files['serviceChargeRecieveFile'] ? req.files['serviceChargeRecieveFile'][0].path : null;
-
+    const warehouse2Sign = req.files['warehouse2Sign'] ? req.files['warehouse2Sign'][0].path : null;
 
 
     const miscAttach = req.files['miscAttach'] ? req.files['miscAttach'][0].path : null;
     const miscShipFile = req.files['miscShipFile'] ? req.files['miscShipFile'][0].path : null;
     const miscRecieveFile = req.files['miscRecieveFile'] ? req.files['miscRecieveFile'][0].path : null;
-
+    const miscSign = req.files['miscSign'] ? req.files['miscSign'][0].path : null;
 
     const salesAttach = req.files['salesAttach'] ? req.files['salesAttach'][0].path : null;
     const salesShipFile = req.files['salesShipFile'] ? req.files['salesShipFile'][0].path : null;
     const salesRecieveFile = req.files['salesRecieveFile'] ? req.files['salesRecieveFile'][0].path : null;
+    const saleSign = req.files['saleSign'] ? req.files['saleSign'][0].path : null;
 
 
     const profitAttach = req.files['profitAttach'] ? req.files['profitAttach'][0].path : null;
@@ -95,6 +100,7 @@ export const add = catchAsyncError(async (req, res) => {
         POnumber: mdsePOnumber,
         amount: mdseAmount,
         attach: mdseAttach,
+        sign: mdseSign,
         ship: {
           date: mdseShipDate,
           file: mdseShipFile
@@ -117,6 +123,7 @@ export const add = catchAsyncError(async (req, res) => {
         POnumber: freightPOnumber,
         amount: freightAmount,
         attach: freightAttach,
+        sign: freightSign,
         ship: {
           date: freightShipDate,
           file: freightShipFile
@@ -138,6 +145,7 @@ export const add = catchAsyncError(async (req, res) => {
         POnumber: freight2POnumber,
         amount: freight2Amount,
         attach: freight2Attach,
+        sign: freight2Sign,
         ship: {
           date: freight2ShipDate,
           file: freight2ShipFile
@@ -158,6 +166,7 @@ export const add = catchAsyncError(async (req, res) => {
         POnumber: warehousePOnumber,
         amount: warehouseAmount,
         attach: warehouseAttach,
+        sign: warehouseSign,
         ship: {
           date: warehouseShipDate,
           file: warehouseShipFile
@@ -191,6 +200,25 @@ export const add = catchAsyncError(async (req, res) => {
         }
       },
 
+      serviceCharge2: {
+        vendor: serviceCharge2Vendor || undefined,
+        POnumber: serviceCharge2POnumber,
+        amount: serviceCharge2Amount,
+        attach: '',
+        ship: {
+          date: serviceCharge2ShipDate,
+          file: ''
+        },
+        recieve: {
+          date: serviceCharge2RecieveDate,
+          file: ''
+        },
+        tracking: {
+          link: serviceCharge2Tracking,
+          number: serviceCharge2TrackingNumber
+        }
+      },
+      
 
       misc: {
         vendor: miscVendor || undefined,
@@ -198,6 +226,7 @@ export const add = catchAsyncError(async (req, res) => {
         amount: miscAmount,
         attach: miscAttach,
         name: miscName,
+        sign: miscSign,
         ship: {
           date: miscShipDate,
           file: miscShipFile
@@ -271,7 +300,9 @@ export const add = catchAsyncError(async (req, res) => {
           number: PRCTrackingNumber
         }
       },
-
+      PIE: {
+        amount: PIEAmout
+      }
     });
   
     await newVendor.save();

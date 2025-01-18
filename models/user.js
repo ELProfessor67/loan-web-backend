@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema({
 	resetPasswordExpire: {type: String, default: undefined},
     role: {type: String, enum: ['user','admin'],default: 'user'},
 	adminServiceCharge: {type: Number,required: false,default: undefined},
+	adminServiceCharge2: {type: Number,required: false,default: undefined},
 	bank: {type: mongoose.Schema.Types.ObjectId,ref: 'bank',default: undefined},
 	company: {type: mongoose.Schema.Types.ObjectId, ref: 'company'}
 },{timestamps: true});

@@ -50,32 +50,39 @@ router.route('/add').post(isAuthenticate,uploader.fields([
     { name: 'mdseAttach', maxCount: 1 },
     { name: 'mdseShipFile', maxCount: 1 },
     { name: 'mdseRecieveFile', maxCount: 1 },
+    { name: 'mdseSign', maxCount: 1 },
 
     { name: 'freightAttach', maxCount: 1 },
     { name: 'freightShipFile', maxCount: 1 },
     { name: 'freightRecieveFile', maxCount: 1 },
+    { name: 'freightSign', maxCount: 1 },
 
 
     { name: 'freight2Attach', maxCount: 1 },
     { name: 'freight2ShipFile', maxCount: 1 },
     { name: 'freight2RecieveFile', maxCount: 1 },
+    { name: 'freight2Sign', maxCount: 1 },
 
 
     { name: 'warehouseAttach', maxCount: 1 },
     { name: 'warehouseShipFile', maxCount: 1 },
     { name: 'warehouseRecieveFile', maxCount: 1 },
+    { name: 'warehouseSign', maxCount: 1 },
 
     { name: 'serviceChargeAttach', maxCount: 1 },
     { name: 'serviceChargeShipFile', maxCount: 1 },
     { name: 'serviceChargeRecieveFile', maxCount: 1 },
+    { name: 'warehouse2Sign', maxCount: 1 },
 
     { name: 'miscAttach', maxCount: 1 },
     { name: 'miscShipFile', maxCount: 1 },
     { name: 'miscRecieveFile', maxCount: 1 },
+    { name: 'miscSign', maxCount: 1 },
 
     { name: 'salesAttach', maxCount: 1 },
     { name: 'salesShipFile', maxCount: 1 },
     { name: 'salesRecieveFile', maxCount: 1 },
+    { name: 'saleSign', maxCount: 1 },
 
     { name: 'profitAttach', maxCount: 1 },
     { name: 'profitShipFile', maxCount: 1 },

@@ -120,10 +120,10 @@ export const logout = catchAsyncError(async (req, res, next) => {
 });
 
 export const updateUser = catchAsyncError(async (req, res, next) => {
-	const {name, email,address,city,state,phone,adminServiceCharge} = req.body;
+	const {name, email,address,city,state,phone,adminServiceCharge, adminServiceCharge2} = req.body;
 	
 
-	const user = await UserModel.findByIdAndUpdate(req.user._id,{name, email,address,city,state,phone,adminServiceCharge});
+	const user = await UserModel.findByIdAndUpdate(req.user._id,{name, email,address,city,state,phone,adminServiceCharge, adminServiceCharge2});
 	
 	res.status(200).json({
 		success: true,
@@ -226,9 +226,11 @@ export const resetPassword = catchAsyncError(async (req, res, next) => {
 export const getSericeCharge = catchAsyncError(async (req, res, next) => {
     const user = await UserModel.findOne({role: 'admin'});
     const adminServiceCharge = user.adminServiceCharge;
+    const adminServiceCharge2 = user.adminServiceCharge2;
 	res.status(200).json({
         success: true,
-        serviceCharge: adminServiceCharge || 200
+        serviceCharge: adminServiceCharge || 5,
+        serviceCharge2: adminServiceCharge2 || 2
     })
   });
 
