@@ -27,8 +27,12 @@ const userSchema = new mongoose.Schema({
     role: {type: String, enum: ['user','admin'],default: 'user'},
 	adminServiceCharge: {type: Number,required: false,default: undefined},
 	adminServiceCharge2: {type: Number,required: false,default: undefined},
+	miniumRevenue: {type: Number,required: false,default: undefined},
+	miniumRevenueAmout: {type: Number,required: false,default: undefined},
+	escrowAmout: {type: Number,required: false,default: undefined},
+	assumedProfit: {type: Number,required: false,default: undefined},
 	bank: {type: mongoose.Schema.Types.ObjectId,ref: 'bank',default: undefined},
-	company: {type: mongoose.Schema.Types.ObjectId, ref: 'company'}
+	company: {type: mongoose.Schema.Types.ObjectId, ref: 'company'},
 },{timestamps: true});
 
 

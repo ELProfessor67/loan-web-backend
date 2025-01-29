@@ -120,10 +120,10 @@ export const logout = catchAsyncError(async (req, res, next) => {
 });
 
 export const updateUser = catchAsyncError(async (req, res, next) => {
-	const {name, email,address,city,state,phone,adminServiceCharge, adminServiceCharge2} = req.body;
+	const {name, email,address,city,state,phone,adminServiceCharge, adminServiceCharge2,miniumRevenue,miniumRevenueAmout,escrowAmout,assumedProfit} = req.body;
 	
 
-	const user = await UserModel.findByIdAndUpdate(req.user._id,{name, email,address,city,state,phone,adminServiceCharge, adminServiceCharge2});
+	const user = await UserModel.findByIdAndUpdate(req.user._id,{name, email,address,city,state,phone,adminServiceCharge, adminServiceCharge2, miniumRevenue,miniumRevenueAmout,escrowAmout,assumedProfit});
 	
 	res.status(200).json({
 		success: true,
@@ -227,10 +227,19 @@ export const getSericeCharge = catchAsyncError(async (req, res, next) => {
     const user = await UserModel.findOne({role: 'admin'});
     const adminServiceCharge = user.adminServiceCharge;
     const adminServiceCharge2 = user.adminServiceCharge2;
+    const miniumRevenue = user.miniumRevenue;
+    const miniumRevenueAmout = user.miniumRevenueAmout;
+    const escrowAmout = user.escrowAmout;
+    const assumedProfit = user.assumedProfit;
+
 	res.status(200).json({
         success: true,
         serviceCharge: adminServiceCharge || 5,
-        serviceCharge2: adminServiceCharge2 || 2
+        serviceCharge2: adminServiceCharge2 || 2,
+        miniumRevenue,
+        miniumRevenueAmout,
+        escrowAmout,
+        assumedProfit
     })
   });
 
