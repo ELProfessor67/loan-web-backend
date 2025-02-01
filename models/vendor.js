@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import userModel from "./user.js";
+import { verify } from "crypto";
 
 
 const vendorSchema = new mongoose.Schema({
@@ -27,7 +28,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'Pending'},
     },
     freight: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -47,7 +51,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'Pending'},
     },
     freight2: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -67,7 +74,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'Pending'},
     },
     warehouse: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -87,7 +97,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'Pending'},
     },
     serviceCharge: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -106,7 +119,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'Pending'},
     },
     serviceCharge2: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -125,7 +141,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'Pending'},
     },
     misc: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -146,7 +165,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'Pending'},
     },
     sales: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'salecompany' },
@@ -166,7 +188,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'pending'},
     },
     profit: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -185,7 +210,10 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
+        status: {type: String, default: 'Pending'},
     },
     PRC: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -204,7 +232,9 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
     },
 
 
@@ -225,7 +255,9 @@ const vendorSchema = new mongoose.Schema({
         tracking: {
             link: { type: String, default: undefined },
             number: { type: String, default: undefined }
-        }
+        },
+        verified: {type: Boolean, default: false},
+        message: {type: String, default: undefined},
     },
 
 }, { timestamps: true });

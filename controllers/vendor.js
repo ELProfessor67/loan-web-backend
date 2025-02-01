@@ -350,6 +350,41 @@ export const add = catchAsyncError(async (req, res) => {
     });
   });
 
+  export const updateState = catchAsyncError(async (req, res) => {
+    const { id } = req.params;
+    const {status,message,state } = req.body;
+
+  
+    // Find vendor by ID
+    let vendor = await VendorModel.findById(id);
+    if (!vendor) {
+      return res.status(404).json({
+        success: false,
+        message: "Vendor not found"
+      });
+    }
+  
+    // Check if user role is admin or the status is reject
+    if (req.user.role !== 'admin') {
+      return res.status(403).json({
+        success: false,
+        message: "You are not allowed to update this vendor"
+      });
+    }
+  
+
+    vendor[state].status = status || vendor.status;
+    vendor[state].message = message;
+  
+    await vendor.save();
+  
+    res.status(200).json({
+      success: true,
+      message: "Vendor updated successfully",
+      vendor
+    });
+  });
+
 // Delete a vendor
 export const deletevendor = catchAsyncError(async (req, res) => {
   const { id } = req.params;
@@ -409,7 +444,7 @@ export const getAll = catchAsyncError(async (req, res) => {
 
   // If the user is admin, get all vendors
   if (req.user.role === 'admin') {
-    vendors = await VendorModel.find();
+    vendors = await VendorModel.find().populate('owner');
   }
 
   res.status(200).json({

@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router();
-import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers, addCompany, getCompany, addBank, getBank, getUniqueDelaNUmber, addSalesCompany, getSalesCompany } from '../controllers/vendor.js';
+import { add, update, deletevendor, getSingle, getByUserId, getAll, addMember, getMembers, addCompany, getCompany, addBank, getBank, getUniqueDelaNUmber, addSalesCompany, getSalesCompany, updateState } from '../controllers/vendor.js';
 import { isAuthenticate,isCheckRole } from '../middlewears/auth.js';
 import { getAllByStatus } from '../controllers/vendor.js';
 import multer from 'multer'
@@ -82,7 +82,7 @@ router.route('/add').post(isAuthenticate,uploader.fields([
     { name: 'salesAttach', maxCount: 1 },
     { name: 'salesShipFile', maxCount: 1 },
     { name: 'salesRecieveFile', maxCount: 1 },
-    { name: 'saleSign', maxCount: 1 },
+    { name: 'salesSign', maxCount: 1 },
 
     { name: 'profitAttach', maxCount: 1 },
     { name: 'profitShipFile', maxCount: 1 },
@@ -92,6 +92,12 @@ router.route('/add').post(isAuthenticate,uploader.fields([
     { name: 'PRCAttach', maxCount: 1 },
     { name: 'PRCShipFile', maxCount: 1 },
     { name: 'PRCRecieveFile', maxCount: 1 },
+
+    { name: 'serviceCharge2Attach', maxCount: 1 },
+    { name: 'serviceCharge2ShipFile', maxCount: 1 },
+    { name: 'serviceCharge2RecieveFile', maxCount: 1 },
+    { name: 'serviceCharge2Sign', maxCount: 1 },
+
   ]), add); 
 
 
@@ -135,8 +141,11 @@ router.route('/update/:id').put(isAuthenticate,uploader.fields([
   { name: 'PRCShipFile', maxCount: 1 },
   { name: 'PRCRecieveFile', maxCount: 1 },
   ]), update);
+
+
 // Route to delete a vendor
 router.route('/delete/:id').delete(isAuthenticate, isCheckRole('admin'), deletevendor); 
+router.route('/update-state-status/:id').put(isAuthenticate, isCheckRole('admin'), updateState); 
 
 // Route to get a single vendor by ID
 router.route('/get/:id').get(isAuthenticate, getSingle);
