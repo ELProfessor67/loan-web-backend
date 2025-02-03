@@ -32,6 +32,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'Pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     freight: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -55,6 +56,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'Pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     freight2: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -78,6 +80,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'Pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     warehouse: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -101,6 +104,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'Pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     serviceCharge: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -123,6 +127,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'Pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     serviceCharge2: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -145,6 +150,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'Pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     misc: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -169,6 +175,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'Pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     sales: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'salecompany' },
@@ -192,6 +199,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     profit: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },
@@ -214,6 +222,7 @@ const vendorSchema = new mongoose.Schema({
         verified: {type: Boolean, default: false},
         message: {type: String, default: undefined},
         status: {type: String, default: 'Pending'},
+        mergeDocument: {type: String, default: undefined}
     },
     PRC: {
         vendor: { type: mongoose.Schema.Types.ObjectId, ref: 'member', default: undefined, required: false },

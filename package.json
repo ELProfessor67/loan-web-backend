@@ -17,9 +17,17 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "image-to-base64": "^2.2.0",
+    "image-to-pdf": "^3.0.2",
+    "imap": "^0.8.19",
     "jsonwebtoken": "^9.0.2",
+    "mailparser": "^3.7.2",
     "mongoose": "^8.5.4",
     "multer": "^1.4.5-lts.1",
-    "nodemailer": "^6.9.14"
+    "nodemailer": "^6.10.0",
+    "pdf-lib": "^1.17.1",
+    "pdf2pic": "^3.1.3",
+    "pdftopic": "^1.0.7-alpha",
+    "uuid": "^11.0.5"
   }
 }
